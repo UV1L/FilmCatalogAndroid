@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.7">
       <module name="FilmCatalog.data" target="11" />
       <module name="FilmCatalog.presentation" target="11" />
+      <module name="FilmCatalog.utils" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

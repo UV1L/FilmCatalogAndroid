@@ -10,3 +10,4 @@ rootProject.name = "FilmCatalog"
 include ':presentation'
 include ':domain'
 include ':data'
+include ':utils'

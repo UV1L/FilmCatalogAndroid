@@ -4,4 +4,8 @@
     <string name="register_message">У меня нет аккаунта</string>
     <string name="login_string">Логин</string>
     <string name="password_string">Пароль</string>
+    <string name="navigation_header">Navigation header</string>
+    <string name="home">Home</string>
+    <string name="gallery">Gallery</string>
+    <string name="slideshow">Slideshow</string>
 </resources>

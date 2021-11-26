@@ -1,21 +1,26 @@
-package com.example.filmcatalog.fragments.login
+package com.example.filmcatalog.ui.fragments.login
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.domain.auth.entities.User
+import com.example.filmcatalog.AuthObserver
 import com.example.filmcatalog.BaseApplication
+import com.example.filmcatalog.MainActivity
+import com.example.filmcatalog.R
 import com.example.filmcatalog.databinding.FragmentLoginBinding
+import com.example.filmcatalog.ui.base.BaseFragment
 import com.example.filmcatalog.view_model.AuthViewModel
+import java.util.ArrayList
 
-class LoginFragment : Fragment() {
+class LoginFragment() : BaseFragment() {
 
     private lateinit var authViewModel: AuthViewModel
 
@@ -23,10 +28,12 @@ class LoginFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private var username: String? = null
+    private lateinit var authObservers: List<AuthObserver>
+
+    private val username: String
         get() = binding.loginFragmentLoginEditTxt.text.toString()
 
-    private var password: String? = null
+    private val password: String
         get() = binding.loginFragmentPasswordEditTxt.text.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +47,8 @@ class LoginFragment : Fragment() {
                 return AuthViewModel(authUseCase) as T
             }
         }).get(AuthViewModel::class.java)
+
+        authObservers = listOf(activity as MainActivity)
     }
 
     override fun onCreateView(
@@ -55,8 +64,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setEditTextListener(binding.loginFragmentLoginEditTxt, binding.loginFragmentPasswordEditTxt)
         setLoginBtnOnClickListener()
+        observeLivedata()
     }
 
     override fun onDestroy() {
@@ -70,32 +79,32 @@ class LoginFragment : Fragment() {
         binding.loginFragmentLoginBtn.setOnClickListener {
 
             if (username != "" && password != "")
-                authViewModel.auth(username!!, password!!)
+                authViewModel.auth(username, password)
             else
                 Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun setEditTextListener(vararg targetView: EditText) {
+    private fun observeLivedata() {
 
-        targetView.forEach {
-            it.addTextChangedListener(object : TextWatcher {
+        authViewModel.error.observe(viewLifecycleOwner) {
 
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        username = ""
-                        password = ""
-                    }
+            showError(it)
+        }
 
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        username = s.toString()
-                    }
+        authViewModel.loading.observe(viewLifecycleOwner) {
 
-                    override fun afterTextChanged(s: Editable?) {
+            showLoading()
+        }
 
-                    }
+        authViewModel.token.observe(viewLifecycleOwner) {
 
-                })
-            }
+            hideLoading()
+            (activity?.application as BaseApplication).saveTokenToSharedPreferences(it)
+            authObservers.forEach { it.setCurrentSessionUser(User(username)) }
+            findNavController().navigate(R.id.action_loginFragment_to_mainPageFragment)
         }
     }
+
+    override fun provideFragmentManager(): FragmentManager = parentFragmentManager
 }

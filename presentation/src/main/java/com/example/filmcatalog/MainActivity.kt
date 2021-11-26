@@ -2,20 +2,31 @@ package com.example.filmcatalog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.filmcatalog.fragments.login.LoginFragment
+import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.domain.auth.entities.User
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AuthObserver {
+
+    var currentSessionUser: User? = null
+        private set
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setTheme(R.style.Theme_FilmCatalog)
         setContentView(R.layout.activity_main)
-
-        if (savedInstanceState == null) {
-
-            supportFragmentManager.beginTransaction()
-                .add(R.id.main_fragment_container, LoginFragment::class.java, null)
-                .commitNow()
-        }
     }
+
+    override fun setCurrentSessionUser(user: User) {
+        currentSessionUser = user
+    }
+}
+
+interface AuthObserver {
+
+    fun setCurrentSessionUser(user: User)
 }
