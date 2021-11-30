@@ -41,7 +41,8 @@
             android:minWidth="300dp"
             android:layout_marginTop="20dp"
             android:hint="@string/password_string"
-            android:background="@drawable/edit_text_selector"/>
+            android:background="@drawable/edit_text_selector"
+            android:inputType="textPassword"/>
 
         <Button
             android:id="@+id/login_fragment_login_btn"

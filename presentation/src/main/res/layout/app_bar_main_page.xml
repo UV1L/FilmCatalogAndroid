@@ -19,6 +19,10 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mainPageRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.appbar.AppBarLayout
@@ -43,7 +47,8 @@
                         android:layout_marginEnd="20dp"
                         android:gravity="end"
                         android:text="@{`Добрый день, ` + user.username}"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textColor="@color/white"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>

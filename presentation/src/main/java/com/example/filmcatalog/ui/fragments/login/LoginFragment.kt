@@ -65,6 +65,7 @@ class LoginFragment() : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setLoginBtnOnClickListener()
+        setRegisterBtnOnClickListener()
         observeLivedata()
     }
 
@@ -85,10 +86,19 @@ class LoginFragment() : BaseFragment() {
         }
     }
 
+    private fun setRegisterBtnOnClickListener() {
+
+        binding.loginFragmentRegisterTxt.setOnClickListener {
+
+            findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
+        }
+    }
+
     private fun observeLivedata() {
 
         authViewModel.error.observe(viewLifecycleOwner) {
 
+            hideLoading()
             showError(it)
         }
 

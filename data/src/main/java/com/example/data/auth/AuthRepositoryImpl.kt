@@ -19,18 +19,19 @@ class AuthRepositoryImpl(private val authService: AuthService) : AuthRepository 
             emit(Resource.Loading<String>())
 
 
-            delay(1000)
-            emit(Resource.Success("token"))
-//            val response = authService.auth(AuthRequest(username, password)).execute()
-//            try {
-//                emit(
-//                    Resource.Success(response.body()!!.token)
-//                )
-//            } catch (e: HttpException) {
-//                emit(Resource.Error<String>(e.localizedMessage ?: "Something went wrong"))
-//            } catch (e: IOException) {
-//                emit(Resource.Error<String>("Couldn't reach server"))
-//            }
+//            delay(1000)
+//            emit(Resource.Success("token"))
+            val response = authService.auth(AuthRequest(username, password)).execute()
+            if (response.body()?.token != null) {
+                emit(
+                    Resource.Success(response.body()?.token)
+                )
+            }
+            else {
+                emit(
+                    Resource.Error<String>("Something went wrong" + response.errorBody()?.string())
+                )
+            }
         }.flowOn(Dispatchers.IO)
     }
 }

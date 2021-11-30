@@ -8,4 +8,9 @@
     <string name="home">Home</string>
     <string name="gallery">Gallery</string>
     <string name="slideshow">Slideshow</string>
+    <string name="email">Почта</string>
+    <string name="password_repeat">Повторите пароль</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="favourites">Favourites</string>
+    <string name="settings">Settings</string>
 </resources>

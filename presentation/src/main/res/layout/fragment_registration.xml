@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/registration_fragment_email_edit_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minWidth="300dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edit_text_selector"/>
+
+    <EditText
+        android:id="@+id/registration_fragment_login_edit_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minWidth="300dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/login_string"
+        android:background="@drawable/edit_text_selector"/>
+
+    <EditText
+        android:id="@+id/registration_fragment_password_1_edit_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minWidth="300dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/password_string"
+        android:background="@drawable/edit_text_selector"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/registration_fragment_password_2_edit_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minWidth="300dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/password_repeat"
+        android:background="@drawable/edit_text_selector"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/registration_fragment_register_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.filmcatalog.ui.base
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.utils.ToastUtils
@@ -50,6 +51,10 @@ abstract class BaseFragment : Fragment() {
 
     fun hideLoading() {
         alertDialog.dismiss()
+    }
+
+    fun showMessage(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     abstract fun provideFragmentManager(): FragmentManager

@@ -6,15 +6,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@mipmap/ic_launcher_round"
+            android:icon="@drawable/ic_home"
+            android:checked="true"
             android:title="@string/home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@mipmap/ic_launcher_round"
-            android:title="@string/gallery" />
+            android:id="@+id/nav_favourites"
+            android:icon="@drawable/ic_favourites"
+            android:title="@string/favourites" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@mipmap/ic_launcher_round"
-            android:title="@string/slideshow" />
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
     </group>
 </menu>

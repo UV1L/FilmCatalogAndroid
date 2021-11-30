@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.filmcatalog.BaseApplication
 import com.example.filmcatalog.MainActivity
 import com.example.filmcatalog.view_model.MainPageViewModel
@@ -26,12 +28,6 @@ class MainPageFragment : BaseFragment() {
     private lateinit var _binding: FragmentMainPageBinding
     private val binding
         get() = _binding
-    private lateinit var _appBarBinding: AppBarMainPageBinding
-    private val appBarBinding
-        get() = _appBarBinding
-    private lateinit var _navHeaderBinding: NavHeaderMainBinding
-    private val navHeaderBinding
-        get() = _navHeaderBinding
 
     private val viewModel by viewModels<MainPageViewModel>()
 
@@ -42,16 +38,27 @@ class MainPageFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainPageBinding.inflate(inflater, container, false)
-        _appBarBinding = AppBarMainPageBinding.inflate(inflater, container, false)
-        _navHeaderBinding = NavHeaderMainBinding.inflate(inflater, container, false)
-        appBarBinding.user = (activity as MainActivity).currentSessionUser
-        navHeaderBinding.user = (activity as MainActivity).currentSessionUser
+        binding.appBarMain.user = (activity as MainActivity).currentSessionUser
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.navHeaderUsername).text = (activity as MainActivity).currentSessionUser?.username
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Toast.makeText(context, (activity?.application as BaseApplication).getToken(), Toast.LENGTH_SHORT).show()
+        setNavigationOnClickListener()
+//        binding.appBarMain.
+    }
+
+    private fun setNavigationOnClickListener() {
+
+        binding.navView.setNavigationItemSelectedListener {
+
+            when(it.itemId) {
+                R.id.nav_home -> true
+                R.id.nav_favourites -> true
+                else -> true
+            }
+        }
     }
 }
