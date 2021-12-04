@@ -1,21 +1,14 @@
 package com.example.filmcatalog.dagger
 
-import com.example.data.auth.AuthRepositoryImpl
-import com.example.data.auth.AuthService
-import com.example.data.auth.RegisterRepositoryImpl
-import com.example.data.auth.RegisterService
-import com.example.domain.auth.repo.AuthRepository
+import com.example.data.registration.RegisterRepositoryImpl
+import com.example.data.registration.RegisterService
 import com.example.domain.auth.repo.RegisterRepository
-import com.example.domain.auth.use_case.AuthUseCase
-import com.example.domain.auth.use_case.AuthUseCaseImpl
 import com.example.domain.auth.use_case.RegisterUseCase
 import com.example.domain.auth.use_case.RegisterUseCaseImpl
-import com.example.filmcatalog.utils.Const
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
+import javax.inject.Named
 
 @Module
 class RegistrationModule {
@@ -31,7 +24,7 @@ class RegistrationModule {
     }
 
     @Provides
-    fun provideRegisterService(retrofit: Retrofit): RegisterService {
+    fun provideRegisterService(@Named("AuthRetrofit") retrofit: Retrofit): RegisterService {
         return retrofit.create(RegisterService::class.java)
     }
 }

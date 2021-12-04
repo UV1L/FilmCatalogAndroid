@@ -1,4 +1,4 @@
-package com.example.data.auth
+package com.example.data.registration
 
 import com.google.gson.annotations.SerializedName
 

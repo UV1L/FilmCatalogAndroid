@@ -1,5 +1,7 @@
-package com.example.data.auth
+package com.example.data.registration
 
+import com.example.data.registration.RegisterRequest
+import com.example.data.registration.RegisterService
 import com.example.domain.auth.entities.Resource
 import com.example.domain.auth.repo.RegisterRepository
 import kotlinx.coroutines.Dispatchers

@@ -22,7 +22,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mainPageRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:clipToPadding="false"/>
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.appbar.AppBarLayout
@@ -33,7 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways"
-                android:theme="@style/ThemeOverlay.MaterialComponents.Toolbar.Surface">
+                android:theme="@style/ThemeOverlay.MaterialComponents.Toolbar.Surface"
+                android:background="@color/dark_blue">
 
                 <LinearLayout
                     android:layout_width="match_parent"

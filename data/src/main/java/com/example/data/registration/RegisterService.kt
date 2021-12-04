@@ -1,4 +1,4 @@
-package com.example.data.auth
+package com.example.data.registration
 
 import retrofit2.Call
 import retrofit2.http.Body
