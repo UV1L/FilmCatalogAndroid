@@ -111,7 +111,7 @@ class LoginFragment() : BaseFragment() {
 
             hideLoading()
             (activity?.application as BaseApplication).saveTokenToSharedPreferences(it)
-            authObservers.forEach { it.setCurrentSessionUser(User(username)) }
+            (activity?.application as BaseApplication).saveCurrentUsername(username)
             findNavController().navigate(R.id.action_loginFragment_to_mainPageFragment)
         }
     }

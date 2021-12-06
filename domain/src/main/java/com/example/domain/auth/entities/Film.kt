@@ -3,7 +3,7 @@ package com.example.domain.auth.entities
 import com.google.gson.annotations.SerializedName
 
 data class Film(
-    @SerializedName("id")
+    @SerializedName("filmId")
     val id: Int,
     @SerializedName("title")
     val title: String,
@@ -12,5 +12,7 @@ data class Film(
     @SerializedName("overview")
     val overview: String,
     @SerializedName("poster")
-    val posterPath: String
+    val posterPath: String,
+    @SerializedName("likedBy")
+    val likedBy: Set<User>
 )

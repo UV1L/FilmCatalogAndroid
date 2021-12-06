@@ -1,14 +1,19 @@
 package com.example.filmcatalog.dagger
 
-import com.example.domain.auth.use_case.AuthUseCase
-import com.example.domain.auth.use_case.FilmsUseCase
-import com.example.domain.auth.use_case.RegisterUseCase
-import com.example.filmcatalog.dagger.AuthModule
+import com.example.domain.auth.use_case.*
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AuthModule::class, RegistrationModule::class, FilmsModule::class, AuthRetrofitModule::class, FilmsRetrofitModule::class])
+@Component(modules = [
+    AuthModule::class,
+    RegistrationModule::class,
+    FilmsModule::class,
+    UserModule::class,
+    AuthRetrofitModule::class,
+    FilmsRetrofitModule::class,
+    UserRetrofitModule::class
+])
 interface ApplicationComponent {
 
     fun injectAuthUseCase(): AuthUseCase
@@ -16,4 +21,8 @@ interface ApplicationComponent {
     fun injectRegisterUseCase(): RegisterUseCase
 
     fun injectFilmsUseCase(): FilmsUseCase
+
+    fun injectAddFavouritesUseCase(): AddFavouritesUseCase
+
+    fun injectGetFavouritesUseCase(): GetFavouritesUseCase
 }

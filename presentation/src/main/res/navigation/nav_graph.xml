@@ -13,7 +13,13 @@
             android:id="@+id/action_loginFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true">
+
+            <argument
+                android:name="showFavourites"
+                app:argType="boolean"
+                android:defaultValue="false"/>
+        </action>
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
@@ -22,13 +28,36 @@
         android:id="@+id/mainPageFragment"
         android:name="com.example.filmcatalog.ui.fragments.main_page.MainPageFragment"
         android:label="main_page_fragment"
-        tools:layout="@layout/fragment_main_page" />
+        tools:layout="@layout/fragment_main_page">
+
+        <argument
+            android:name="showFavourites"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <action
+            android:id="@+id/action_mainPageFragment_to_favouritesFragment"
+            app:destination="@id/mainPageFragment">
+            <argument
+                android:name="showFavourites"
+                app:argType="boolean"
+                android:defaultValue="true"/>
+        </action>
+        <action
+            android:id="@+id/action_favouritesFragment_to_mainPageFrament"
+            app:destination="@id/mainPageFragment">
+            <argument
+                android:name="showFavourites"
+                app:argType="boolean"
+                android:defaultValue="false"/>
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.filmcatalog.ui.fragments.register.RegistrationFragment"
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
 </navigation>
