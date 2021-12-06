@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.DialogFragmentNavigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.auth.entities.Film
@@ -21,7 +22,9 @@ import com.example.filmcatalog.ui.base.BaseFragment
 import com.example.filmcatalog.ui.fragments.main_page.recycler_view.FilmListRecyclerAdapter
 import com.google.android.material.navigation.NavigationView
 
-class MainPageFragment : BaseFragment(), FilmListRecyclerAdapter.ItemSelectedListener {
+class MainPageFragment : BaseFragment(),
+    FilmListRecyclerAdapter.ItemSelectedListener,
+    FilmListRecyclerAdapter.ViewMoreClickListener {
 
     companion object {
         fun newInstance() = MainPageFragment()
@@ -80,7 +83,7 @@ class MainPageFragment : BaseFragment(), FilmListRecyclerAdapter.ItemSelectedLis
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.navHeaderUsername).text = (activity?.application as BaseApplication).getCurrentUsername()!!
         _filmLayoutBinding = FilmLayoutBinding.inflate(LayoutInflater.from(context), container, false)
 
-        adapter = FilmListRecyclerAdapter.getInstance(requireActivity().application, mutableListOf(), this)
+        adapter = FilmListRecyclerAdapter.getInstance(requireActivity().application, mutableListOf(), this, this)
 
         return binding.root
     }
@@ -145,5 +148,11 @@ class MainPageFragment : BaseFragment(), FilmListRecyclerAdapter.ItemSelectedLis
     override fun onItemSelected(item: Film) {
 
         mainPageViewModel.addFilmToFavourites(token, item.id)
+    }
+
+    override fun onItemClickListener(item: Film) {
+
+        val action = MainPageFragmentDirections.mainPageFragmentToOverviewDialogFragment(item.overview)
+        findNavController().navigate(action)
     }
 }

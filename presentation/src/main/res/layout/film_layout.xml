@@ -64,8 +64,21 @@
             android:text="long overview long overview long overview long overview long overview long overview"
             android:textSize="15sp"
             android:fontFamily="@font/lato_light"
-            android:maxLines="10"
+            android:maxLines="5"
+            android:ellipsize="end"
             android:scrollbars="vertical"/>
+
+        <Button
+            android:id="@+id/filmFullTitleBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toBottomOf="@id/filmOverview"
+            app:layout_constraintEnd_toEndOf="@id/filmOverview"
+            android:text="view all"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:textColor="@color/hint_gray"
+            android:textSize="11sp"
+            android:textAlignment="textEnd" />
 
         <Button
             android:id="@+id/filmFavourite"

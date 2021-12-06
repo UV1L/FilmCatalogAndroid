@@ -50,6 +50,12 @@
                 app:argType="boolean"
                 android:defaultValue="false"/>
         </action>
+        <action
+            android:id="@+id/mainPageFragment_to_overviewDialogFragment"
+            app:destination="@id/overviewDialogFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim">
+
+        </action>
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -60,4 +66,13 @@
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
+    <dialog
+        android:id="@+id/overviewDialogFragment"
+        android:name="com.example.filmcatalog.ui.fragments.overview_dialog.OverviewDialogFragment"
+        android:label="OverviewDialogFragment">
+
+        <argument
+            android:name="overview"
+            app:argType="string"/>
+    </dialog>
 </navigation>

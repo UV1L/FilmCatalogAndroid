@@ -22,6 +22,7 @@ import javax.inject.Inject
 class FilmListRecyclerAdapter(
     private val films: MutableList<Film>,
     private val itemSelectedListener: ItemSelectedListener,
+    private val viewMoreClickListener: ViewMoreClickListener
 ) : RecyclerView.Adapter<FilmListRecyclerAdapter.FilmViewHolder>() {
 
     companion object {
@@ -30,16 +31,21 @@ class FilmListRecyclerAdapter(
 
         fun getInstance(application: Application,
                         films: MutableList<Film>,
-                        itemSelectedListener: ItemSelectedListener,): FilmListRecyclerAdapter {
+                        itemSelectedListener: ItemSelectedListener,
+                        viewMoreClickListener: ViewMoreClickListener): FilmListRecyclerAdapter {
 
             app = application
 
-            return FilmListRecyclerAdapter(films, itemSelectedListener)
+            return FilmListRecyclerAdapter(films, itemSelectedListener, viewMoreClickListener)
         }
     }
 
     interface ItemSelectedListener {
         fun onItemSelected(item: Film)
+    }
+
+    interface ViewMoreClickListener {
+        fun onItemClickListener(item: Film)
     }
 
     inner class FilmViewHolder(val binding: FilmLayoutBinding) :
@@ -50,6 +56,10 @@ class FilmListRecyclerAdapter(
 
                 it.isSelected = !it.isSelected
                 itemSelectedListener.onItemSelected(films[adapterPosition])
+            }
+            binding.filmFullTitleBtn.setOnClickListener {
+
+                viewMoreClickListener.onItemClickListener(films[adapterPosition])
             }
         }
     }

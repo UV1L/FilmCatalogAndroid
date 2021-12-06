@@ -13,12 +13,13 @@
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/drawable/splash_screen_logo_plain_text.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/activity_main.xml" value="0.2898550724637681" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/app_bar_main_page.xml" value="0.14792299898682879" />
-        <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/film_layout.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/film_layout.xml" value="0.264" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/fragment_main_page.xml" value="0.16" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/fragment_registration.xml" value="0.31567028985507245" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/fragment_splash.xml" value="0.2898550724637681" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/nav_header_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/layout/overview_dialog.xml" value="0.152" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/menu/main_drawer.xml" value="0.2994871794871795" />
         <entry key="..\:/Users/Anton/AndroidStudioProjects/FilmCatalog/presentation/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3769230769230769" />
         <entry key="presentation/src/main/res/drawable/circle_shape.xml" value="0.30092592592592593" />
