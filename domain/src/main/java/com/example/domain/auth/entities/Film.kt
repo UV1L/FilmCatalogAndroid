@@ -1,6 +1,7 @@
 package com.example.domain.auth.entities
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Film(
     @SerializedName("filmId")
@@ -15,4 +16,4 @@ data class Film(
     val posterPath: String,
     @SerializedName("likedBy")
     val likedBy: Set<User>
-)
+) : Serializable

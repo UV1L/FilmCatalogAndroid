@@ -11,7 +11,7 @@
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_mainPageFragment"
-            app:destination="@id/mainPageFragment"
+            app:destination="@id/filmListFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true">
 
@@ -25,10 +25,10 @@
             app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mainPageFragment"
-        android:name="com.example.filmcatalog.ui.fragments.main_page.MainPageFragment"
-        android:label="main_page_fragment"
-        tools:layout="@layout/fragment_main_page">
+        android:id="@+id/filmListFragment"
+        android:name="com.example.filmcatalog.ui.fragments.main_page.FilmListFragment"
+        android:label="film_list_fragment"
+        tools:layout="@layout/fragment_film_list">
 
         <argument
             android:name="showFavourites"
@@ -36,7 +36,7 @@
             android:defaultValue="false"/>
         <action
             android:id="@+id/action_mainPageFragment_to_favouritesFragment"
-            app:destination="@id/mainPageFragment">
+            app:destination="@id/filmListFragment">
             <argument
                 android:name="showFavourites"
                 app:argType="boolean"
@@ -44,18 +44,23 @@
         </action>
         <action
             android:id="@+id/action_favouritesFragment_to_mainPageFrament"
-            app:destination="@id/mainPageFragment">
+            app:destination="@id/filmListFragment">
             <argument
                 android:name="showFavourites"
                 app:argType="boolean"
                 android:defaultValue="false"/>
         </action>
         <action
-            android:id="@+id/mainPageFragment_to_overviewDialogFragment"
+            android:id="@+id/filmListFragment_to_overviewDialogFragment"
             app:destination="@id/overviewDialogFragment"
             app:enterAnim="@anim/nav_default_pop_enter_anim">
 
         </action>
+        <action
+            android:id="@+id/action_filmListFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -75,4 +80,13 @@
             android:name="overview"
             app:argType="string"/>
     </dialog>
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.example.filmcatalog.ui.fragments.reviews.ReviewsFragment"
+        android:label="ReviewsFragment">
+
+        <argument
+            android:name="film"
+            app:argType="java.io.Serializable"/>
+    </fragment>
 </navigation>

@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.domain.auth.entities.Film
@@ -20,32 +22,36 @@ import com.example.filmcatalog.utils.PrefUtils
 import javax.inject.Inject
 
 class FilmListRecyclerAdapter(
-    private val films: MutableList<Film>,
-    private val itemSelectedListener: ItemSelectedListener,
-    private val viewMoreClickListener: ViewMoreClickListener
-) : RecyclerView.Adapter<FilmListRecyclerAdapter.FilmViewHolder>() {
+    private val itemSelectedListener: ItemSelectedListener
+) : ListAdapter<Film, FilmListRecyclerAdapter.FilmViewHolder>(DiffCallback()) {
 
     companion object {
 
         lateinit var app: Application
 
         fun getInstance(application: Application,
-                        films: MutableList<Film>,
-                        itemSelectedListener: ItemSelectedListener,
-                        viewMoreClickListener: ViewMoreClickListener): FilmListRecyclerAdapter {
+                        itemSelectedListener: ItemSelectedListener
+        ): FilmListRecyclerAdapter {
 
             app = application
 
-            return FilmListRecyclerAdapter(films, itemSelectedListener, viewMoreClickListener)
+            return FilmListRecyclerAdapter(itemSelectedListener)
         }
+    }
+
+    private class DiffCallback : DiffUtil.ItemCallback<Film>() {
+
+        override fun areItemsTheSame(oldItem: Film, newItem: Film): Boolean =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Film, newItem: Film): Boolean =
+            oldItem == newItem
     }
 
     interface ItemSelectedListener {
         fun onItemSelected(item: Film)
-    }
-
-    interface ViewMoreClickListener {
-        fun onItemClickListener(item: Film)
+        fun onViewAllClickListener(item: Film)
+        fun onReviewClickListener(item: Film)
     }
 
     inner class FilmViewHolder(val binding: FilmLayoutBinding) :
@@ -55,11 +61,15 @@ class FilmListRecyclerAdapter(
             binding.filmFavourite.setOnClickListener {
 
                 it.isSelected = !it.isSelected
-                itemSelectedListener.onItemSelected(films[adapterPosition])
+                itemSelectedListener.onItemSelected(currentList[adapterPosition])
             }
             binding.filmFullTitleBtn.setOnClickListener {
 
-                viewMoreClickListener.onItemClickListener(films[adapterPosition])
+                itemSelectedListener.onViewAllClickListener(currentList[adapterPosition])
+            }
+            binding.filmReviewBtn.setOnClickListener {
+
+                itemSelectedListener.onReviewClickListener(currentList[adapterPosition])
             }
         }
     }
@@ -76,7 +86,7 @@ class FilmListRecyclerAdapter(
         val prefs = PrefUtils.create(app.applicationContext)
         val username = prefs.getString(USERNAME_PREF_UTILS, "")!!
 
-        with(films[position]) {
+        with(currentList[position]) {
 
             holder.binding.filmTitle.text = this.title
             holder.binding.filmOverview.text = this.overview
@@ -104,17 +114,15 @@ class FilmListRecyclerAdapter(
         }
     }
 
-    override fun getItemCount(): Int = films.size
+    override fun getItemCount(): Int = currentList.size
 
     fun addFilmsList(list: List<Film>) {
 
-        films.addAll(list)
-        notifyDataSetChanged()
+        submitList(list)
     }
 
     fun addFilm(film: Film) {
 
-        films.add(film)
-        notifyDataSetChanged()
+        submitList(currentList.plus(film))
     }
 }
