@@ -15,4 +15,7 @@ dependencies {
 
     //gson
     implementation 'com.google.code.gson:gson:2.8.7'
+
+    implementation 'javax.inject:javax.inject:1'
+
 }
