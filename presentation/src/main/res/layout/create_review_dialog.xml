@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/your_impressions"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            app:contentPadding="20dp"
+            app:cardElevation="0dp">
+
+            <EditText
+                android:id="@+id/reviewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_light"/>
+        </androidx.cardview.widget.CardView>
+
+        <RatingBar
+            android:id="@+id/reviewRating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            android:isIndicator="false"
+            android:numStars="10"
+            android:progressTint="@color/dark_blue"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            android:stepSize="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/reviewCancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="50dp"
+                android:text="@string/cancel"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/very_light_gray"/>
+
+            <Button
+                android:id="@+id/reviewRateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/rate"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
