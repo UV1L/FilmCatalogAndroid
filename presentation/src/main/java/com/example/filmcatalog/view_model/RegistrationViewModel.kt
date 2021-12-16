@@ -9,16 +9,10 @@ import com.example.domain.auth.use_case.RegisterUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class RegistrationViewModel(private val registerUseCase: RegisterUseCase) : ViewModel() {
+class RegistrationViewModel(private val registerUseCase: RegisterUseCase) : BaseViewModel() {
 
     private val _username: MutableLiveData<String> = MutableLiveData()
     val username: LiveData<String> = _username
-
-    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
-    val loading: LiveData<Boolean> = _loading
-
-    private val _error: MutableLiveData<String> = MutableLiveData()
-    val error: LiveData<String> = _error
 
     fun register(
         email: String,

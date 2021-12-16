@@ -15,11 +15,6 @@ import javax.inject.Named
 class FilmsModule {
 
     @Provides
-    fun provideFilmsUseCase(filmsRepository: FilmsRepository): FilmsUseCase {
-        return FilmsUseCaseImpl(filmsRepository)
-    }
-
-    @Provides
     fun provideFilmsRepository(filmsService: FilmsService): FilmsRepository {
         return FilmsRepositoryImpl(filmsService)
     }

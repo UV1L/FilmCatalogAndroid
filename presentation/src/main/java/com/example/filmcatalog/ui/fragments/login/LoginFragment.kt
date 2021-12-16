@@ -1,7 +1,6 @@
 package com.example.filmcatalog.ui.fragments.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.domain.auth.entities.User
 import com.example.filmcatalog.AuthObserver
 import com.example.filmcatalog.BaseApplication
 import com.example.filmcatalog.MainActivity
@@ -18,7 +16,6 @@ import com.example.filmcatalog.R
 import com.example.filmcatalog.databinding.FragmentLoginBinding
 import com.example.filmcatalog.ui.base.BaseFragment
 import com.example.filmcatalog.view_model.AuthViewModel
-import java.util.ArrayList
 
 class LoginFragment() : BaseFragment() {
 
@@ -107,11 +104,12 @@ class LoginFragment() : BaseFragment() {
             showLoading()
         }
 
-        authViewModel.token.observe(viewLifecycleOwner) {
+        authViewModel.result.observe(viewLifecycleOwner) {
 
             hideLoading()
-            (activity?.application as BaseApplication).saveTokenToSharedPreferences(it)
-            (activity?.application as BaseApplication).saveCurrentUsername(username)
+            (activity?.application as BaseApplication).saveTokenToSharedPreferences(it.token!!)
+            (activity?.application as BaseApplication).saveCurrentUsername(it.username)
+            (activity?.application as BaseApplication).saveCurrentUserId(it.userId)
             findNavController().navigate(R.id.action_loginFragment_to_mainPageFragment)
         }
     }

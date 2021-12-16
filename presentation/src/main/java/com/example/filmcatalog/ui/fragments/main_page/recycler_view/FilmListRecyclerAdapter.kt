@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.domain.auth.entities.Film
+import com.example.domain.auth.entities.Id
 import com.example.domain.auth.entities.User
 import com.example.filmcatalog.BaseApplication
 import com.example.filmcatalog.dagger.GlideApp
 import com.example.filmcatalog.databinding.FilmLayoutBinding
 import com.example.filmcatalog.utils.Const.POSTER_BASE_URL
+import com.example.filmcatalog.utils.Const.USERID_PREF_UTILS
 import com.example.filmcatalog.utils.Const.USERNAME_PREF_UTILS
 import com.example.filmcatalog.utils.PrefUtils
 import javax.inject.Inject
@@ -82,9 +84,8 @@ class FilmListRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
-
-        val prefs = PrefUtils.create(app.applicationContext)
-        val username = prefs.getString(USERNAME_PREF_UTILS, "")!!
+        
+        val userId = (app as BaseApplication).getCurrentUserId()
 
         with(currentList[position]) {
 
@@ -92,7 +93,7 @@ class FilmListRecyclerAdapter(
             holder.binding.filmOverview.text = this.overview
             holder.binding.filmRating.text = this.rating.toString()
             holder.binding.filmId = this.id
-            if (this.likedBy.contains(User(username))) {
+            if (this.likedBy.contains(Id(userId))) {
                 holder.binding.filmFavourite.isSelected = true
             }
             when {

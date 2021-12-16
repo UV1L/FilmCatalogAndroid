@@ -11,16 +11,20 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/filmLayout"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@color/very_light_gray">
 
         <ImageView
             android:id="@+id/filmPoster"
-            android:layout_width="200dp"
-            android:layout_height="300dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:minWidth="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/filmTitle"
@@ -45,27 +49,28 @@
             app:layout_constraintTop_toTopOf="@id/filmTitle"
             app:layout_constraintBottom_toBottomOf="@+id/filmTitle"
             android:layout_marginEnd="20dp"
+            android:layout_marginStart="15dp"
             android:text="7.8"
             android:fontFamily="@font/lato_regular"
-            android:textColor="@color/green"
+            android:textColor="@color/red"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/filmOverview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxWidth="180dp"
-            app:layout_constraintStart_toEndOf="@+id/filmPoster"
-            app:layout_constraintTop_toBottomOf="@+id/filmTitle"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/lato_light"
+            android:maxWidth="180dp"
+            android:maxLines="5"
             android:text="long overview long overview long overview long overview long overview long overview"
             android:textSize="15sp"
-            android:fontFamily="@font/lato_light"
-            android:maxLines="5"
-            android:ellipsize="end"
-            android:scrollbars="vertical"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/filmPoster"
+            app:layout_constraintTop_toBottomOf="@+id/filmTitle" />
 
         <Button
             android:id="@+id/filmFullTitleBtn"

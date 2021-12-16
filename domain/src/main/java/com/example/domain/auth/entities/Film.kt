@@ -10,10 +10,12 @@ data class Film(
     val title: String,
     @SerializedName("rating")
     val rating: Double,
+    @SerializedName("genres")
+    val genres: Set<Genre>,
     @SerializedName("overview")
     val overview: String,
     @SerializedName("poster")
     val posterPath: String,
     @SerializedName("likedBy")
-    val likedBy: Set<User>
+    val likedBy: Set<Id>
 ) : Serializable

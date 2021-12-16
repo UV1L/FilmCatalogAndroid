@@ -88,5 +88,18 @@
         <argument
             android:name="film"
             app:argType="java.io.Serializable"/>
+        <action
+            android:id="@+id/action_reviewsFragment_to_reviewDialogFragment"
+            app:destination="@id/reviewDialogFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim">
+
+            <argument
+                android:name="listener"
+                app:argType="com.example.filmcatalog.ui.fragments.review_dialog.OnSendListener"/>
+        </action>
     </fragment>
+    <dialog
+        android:id="@+id/reviewDialogFragment"
+        android:name="com.example.filmcatalog.ui.fragments.review_dialog.ReviewDialogFragment"
+        android:label="ReviewDialogFragment"/>
 </navigation>

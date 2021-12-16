@@ -25,7 +25,7 @@ class PrefUtils(prefs: SharedPreferences)  {
     }
 
     fun getInt(key: String?, defValue: Int): Int {
-        return prefs!!.getInt(key, defValue)
+        return prefs.getInt(key, defValue)
     }
 
     fun getDouble(key: String?, defValue: Double): Double {

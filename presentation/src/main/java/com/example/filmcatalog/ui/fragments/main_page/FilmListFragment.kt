@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.auth.entities.Film
 import com.example.domain.auth.entities.User
-import com.example.domain.auth.use_case.AddFavouritesUseCase
+import com.example.domain.auth.use_case.FavouritesUseCase
 import com.example.domain.auth.use_case.FilmsUseCase
-import com.example.domain.auth.use_case.GetFavouritesUseCase
+import com.example.domain.auth.use_case.FilmsUseCaseImpl
 import com.example.filmcatalog.BaseApplication
-import com.example.filmcatalog.view_model.MainPageViewModel
+import com.example.filmcatalog.view_model.FilmListViewModel
 import com.example.filmcatalog.R
 import com.example.filmcatalog.databinding.FilmLayoutBinding
 import com.example.filmcatalog.databinding.FragmentFilmListBinding
@@ -47,20 +47,20 @@ class FilmListFragment : BaseFragment(),
         get() = (activity?.application as BaseApplication).getToken()!!
 
     //    private val viewModel by viewModels<MainPageViewModel>()
-    private lateinit var mainPageViewModel: MainPageViewModel
+    private lateinit var filmListViewModel: FilmListViewModel
 
 //    private lateinit var prefUtils: PrefUtils
 
     private lateinit var adapter: FilmListRecyclerAdapter
 
     @Inject
-    lateinit var filmsUseCase: FilmsUseCase
+    lateinit var filmsUseCase: FilmsUseCaseImpl
 
     @Inject
-    lateinit var addFavouritesUseCase: AddFavouritesUseCase
+    lateinit var addFavouritesUseCase: FavouritesUseCase.AddFavouritesUseCase
 
     @Inject
-    lateinit var getFavouritesUseCase: GetFavouritesUseCase
+    lateinit var getFavouritesUseCase: FavouritesUseCase.GetFavouritesUseCase
 
     override fun provideFragmentManager() = parentFragmentManager
 
@@ -69,15 +69,15 @@ class FilmListFragment : BaseFragment(),
 
         (activity?.application as BaseApplication).applicationComponent.inject(this)
 
-        mainPageViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+        filmListViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MainPageViewModel(
+                return FilmListViewModel(
                     filmsUseCase,
                     addFavouritesUseCase,
                     getFavouritesUseCase
                 ) as T
             }
-        }).get(MainPageViewModel::class.java)
+        })[FilmListViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -85,8 +85,13 @@ class FilmListFragment : BaseFragment(),
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFilmListBinding.inflate(inflater, container, false)
+
+        //возможно стоит переделать databinding только под username
+        val userId = (activity?.application as BaseApplication).getCurrentUserId()
+        val username = (activity?.application as BaseApplication).getCurrentUsername()!!
+        val token = (activity?.application as BaseApplication).getToken()!!
         binding.appBarMain.user =
-            User((activity?.application as BaseApplication).getCurrentUsername()!!)
+            User(userId, username, token)
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.navHeaderUsername).text =
             (activity?.application as BaseApplication).getCurrentUsername()!!
@@ -97,8 +102,13 @@ class FilmListFragment : BaseFragment(),
             requireActivity().application,
             this
         )
+        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -108,10 +118,10 @@ class FilmListFragment : BaseFragment(),
         observeLivedata()
         if (SHOW_FAVOURITES_ONLY!!) {
             binding.navView.setCheckedItem(R.id.nav_favourites)
-            mainPageViewModel.getFavouriteFilms(token)
+            filmListViewModel.getFavouriteFilms(token)
         } else {
             binding.navView.setCheckedItem(R.id.nav_home)
-            mainPageViewModel.getAllFilms(token)
+            filmListViewModel.getAllFilms(token)
         }
         binding.appBarMain.mainPageRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.appBarMain.mainPageRecyclerView.adapter = adapter
@@ -151,18 +161,18 @@ class FilmListFragment : BaseFragment(),
 
     private fun observeLivedata() {
 
-        mainPageViewModel.error.observe(viewLifecycleOwner) {
+        filmListViewModel.error.observe(viewLifecycleOwner) {
 
             hideLoading()
             showError(it)
         }
 
-        mainPageViewModel.loading.observe(viewLifecycleOwner) {
+        filmListViewModel.loading.observe(viewLifecycleOwner) {
 
             showLoading()
         }
 
-        mainPageViewModel.films.observe(viewLifecycleOwner) {
+        filmListViewModel.films.observe(viewLifecycleOwner) {
 
             hideLoading()
             adapter.addFilmsList(it)
@@ -171,7 +181,7 @@ class FilmListFragment : BaseFragment(),
 
     override fun onItemSelected(item: Film) {
 
-        mainPageViewModel.addFilmToFavourites(token, item.id)
+        filmListViewModel.addFilmToFavourites(token, item.id)
     }
 
     override fun onViewAllClickListener(item: Film) {

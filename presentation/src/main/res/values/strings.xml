@@ -15,4 +15,8 @@
     <string name="settings">Settings</string>
     <string name="review_btn">Reviews</string>
     <string name="view_all_btn">view all</string>
+    <string name="review">Написать ревью</string>
+    <string name="your_impressions">Ваши впечатления:</string>
+    <string name="rate">Оценить</string>
+    <string name="cancel">Отмена</string>
 </resources>

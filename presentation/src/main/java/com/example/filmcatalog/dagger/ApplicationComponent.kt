@@ -3,6 +3,7 @@ package com.example.filmcatalog.dagger
 import com.example.domain.auth.use_case.*
 import com.example.filmcatalog.ui.fragments.main_page.FilmListFragment
 import com.example.filmcatalog.ui.fragments.main_page.recycler_view.FilmListRecyclerAdapter
+import com.example.filmcatalog.ui.fragments.reviews.ReviewsFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -22,11 +23,7 @@ interface ApplicationComponent {
 
     fun injectRegisterUseCase(): RegisterUseCase
 
-    fun injectFilmsUseCase(): FilmsUseCase
-
-    fun injectAddFavouritesUseCase(): AddFavouritesUseCase
-
-    fun injectGetFavouritesUseCase(): GetFavouritesUseCase
-
     fun inject(filmListFragment: FilmListFragment)
+
+    fun inject(reviewsFragment: ReviewsFragment)
 }

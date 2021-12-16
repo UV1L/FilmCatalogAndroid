@@ -5,11 +5,17 @@
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@color/teal_200</item>
+        <item name="android:textColor">@color/black</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:statusBarColor">@color/white</item>
+    </style>
+
+    <style name="RatingBarMedium" parent="@style/Widget.AppCompat.RatingBar">
+        <item name="android:scaleX">0.5</item>
+        <item name="android:scaleY">0.5</item>
     </style>
 </resources>
